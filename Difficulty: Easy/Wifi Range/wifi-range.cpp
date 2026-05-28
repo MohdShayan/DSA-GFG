@@ -1,0 +1,21 @@
+class Solution {
+  public:
+    bool wifiRange(string &s, int x) {
+    int n = s.size();
+    int lastCovered = -1;
+
+    for (int i = 0; i < n; i++) {
+        if (s[i] == '1') {
+            int left = max(0, i - x);
+            int right = min(n - 1, i + x);
+
+            if (left > lastCovered + 1)
+                return false;
+
+            lastCovered = right;
+        }
+    }
+
+    return lastCovered >= n - 1;
+}
+};
